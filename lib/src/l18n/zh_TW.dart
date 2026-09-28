@@ -299,6 +299,12 @@ class zh_TW {
       /// tag setting page
       'myTags': '我的標籤',
       'myTagsHint': '管理關注和隱藏的標籤',
+      'extraWatchedTags': '額外關注標籤',
+      'extraWatchedTagsHint': '突破線上關注數量限制,並合併顯示在關注頁面',
+      'extraWatchedTagsDesc': '這些標籤僅儲存在本裝置上,由應用自行搜尋,不受線上關注標籤數量限制。對應的畫廊會依發布時間合併到關注頁面中。',
+      'extraWatchedTagsInputHint': 'namespace:key(例如 artist:alp)',
+      'extraWatchedTagsEmpty': '尚無額外關注標籤',
+      'extraWatchedTagsAddFailed': '標籤格式錯誤或已存在',
       'localTags': '本機標籤隱藏',
       'localTagsHint': '額外的隱藏標籤',
       'localTagsHint2': '含有隱藏標籤的畫廊會被隱藏',

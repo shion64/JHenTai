@@ -39,6 +39,7 @@ import 'package:jhentai/src/pages/setting/read/setting_read_page.dart';
 import 'package:jhentai/src/pages/setting/security/setting_security_page.dart';
 import 'package:jhentai/src/pages/setting/setting_page.dart';
 import 'package:jhentai/src/pages/setting/style/setting_style_page.dart';
+import 'package:jhentai/src/pages/setting/eh/extra_watched_tags/extra_watched_tags_page.dart';
 import 'package:jhentai/src/pages/watched/watched_page.dart';
 import 'package:jhentai/src/pages/webview/webview_page.dart';
 import 'package:jhentai/src/setting/preference_setting.dart';
@@ -116,6 +117,7 @@ class Routes {
   static const String pageListStyle = "/setting_style/pageListStyle";
 
   static const String tagSets = "/setting_EH/tagSets";
+  static const String extraWatchedTags = "/setting_EH/extraWatchedTags";
 
   static const String blockingRules = "/setting_preference/blockingRules";
   static const String configureBlockingRules = "/setting_preference/blockRules/configureBlockingRules";
@@ -387,6 +389,12 @@ class Routes {
     EHPage(
       name: tagSets,
       page: () => TagSetsPage().withEscOrFifthButton2BackRightRoute(),
+      transition: defaultTransition,
+      offAllBefore: false,
+    ),
+    EHPage(
+      name: extraWatchedTags,
+      page: () => const ExtraWatchedTagsPage().withEscOrFifthButton2BackRightRoute(),
       transition: defaultTransition,
       offAllBefore: false,
     ),

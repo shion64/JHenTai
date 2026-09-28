@@ -9,6 +9,7 @@ enum ConfigEnum {
 
   /// settings
   favoriteSetting('favoriteSetting'),
+  extraWatchedTagSetting('extraWatchedTagSetting'),
   advancedSetting('advancedSetting'),
   downloadSetting('downloadSetting'),
   EHSetting('EHSetting'),

@@ -38,6 +38,7 @@ import 'package:jhentai/src/setting/advanced_setting.dart';
 import 'package:jhentai/src/setting/archive_bot_setting.dart';
 import 'package:jhentai/src/setting/download_setting.dart';
 import 'package:jhentai/src/setting/eh_setting.dart';
+import 'package:jhentai/src/setting/extra_watched_tag_setting.dart';
 import 'package:jhentai/src/setting/favorite_setting.dart';
 import 'package:jhentai/src/setting/keyboard_shortcut_setting.dart';
 import 'package:jhentai/src/setting/mouse_setting.dart';
@@ -86,6 +87,7 @@ List<JHLifeCircleBean> lifeCircleBeans = [
   downloadSetting,
   archiveBotSetting,
   ehSetting,
+  extraWatchedTagSetting,
   favoriteSetting,
   mouseSetting,
   myTagsSetting,

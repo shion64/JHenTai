@@ -300,6 +300,12 @@ class en_US {
       /// tag setting page
       'myTags': 'My Tags',
       'myTagsHint': 'Manage watched and hidden tags online',
+      'extraWatchedTags': 'Extra Watched Tags',
+      'extraWatchedTagsHint': 'Watch more tags than the online limit, merged into the Watched page',
+      'extraWatchedTagsDesc': 'These tags are stored only on this device and searched by the app itself, so they are not affected by the online watched tag limit. Their galleries are merged into the Watched page by publish time.',
+      'extraWatchedTagsInputHint': 'namespace:key (e.g. artist:alp)',
+      'extraWatchedTagsEmpty': 'No extra watched tags',
+      'extraWatchedTagsAddFailed': 'Invalid or duplicated tag',
       'localTags': 'Local Tags',
       'localTagsHint': 'Extra filter tags',
       'localTagsHint2': 'Galleries with these tags will be hidden',

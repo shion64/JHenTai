@@ -299,6 +299,12 @@ class zh_CN {
       /// tag setting page
       'myTags': '我的标签',
       'myTagsHint': '管理关注和隐藏的标签',
+      'extraWatchedTags': '额外关注标签',
+      'extraWatchedTagsHint': '突破在线关注数量限制,并合并显示在关注页面',
+      'extraWatchedTagsDesc': '这些标签仅保存在本设备上,由应用自行搜索,不受在线关注标签数量限制。对应的画廊会按发布时间合并到关注页面中。',
+      'extraWatchedTagsInputHint': 'namespace:key(例如 artist:alp)',
+      'extraWatchedTagsEmpty': '暂无额外关注标签',
+      'extraWatchedTagsAddFailed': '标签格式错误或已存在',
       'localTags': '本地标签屏蔽',
       'localTagsHint': '额外的屏蔽标签',
       'localTagsHint2': '含有屏蔽标签的画廊会被隐藏',

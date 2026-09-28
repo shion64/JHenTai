@@ -74,6 +74,7 @@ class _SettingEHPageState extends State<SettingEHPage> {
             _buildImageLimit(),
             _buildAssets(),
             _buildMyTags(),
+            _buildExtraWatchedTags(),
           ],
         ).withListTileTheme(context),
       ),
@@ -238,6 +239,15 @@ class _SettingEHPageState extends State<SettingEHPage> {
       subtitle: Text('myTagsHint'.tr),
       trailing: const Icon(Icons.keyboard_arrow_right),
       onTap: () => toRoute(Routes.tagSets),
+    );
+  }
+
+  Widget _buildExtraWatchedTags() {
+    return ListTile(
+      title: Text('extraWatchedTags'.tr),
+      subtitle: Text('extraWatchedTagsHint'.tr),
+      trailing: const Icon(Icons.keyboard_arrow_right),
+      onTap: () => toRoute(Routes.extraWatchedTags),
     );
   }
 
