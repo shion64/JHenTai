@@ -9,12 +9,14 @@ class EHTagDialogDesktopActions extends StatelessWidget {
   final LoadingState voteDownState;
   final LoadingState addWatchedTagState;
   final LoadingState addHiddenTagState;
+  final bool isExtraWatchedTag;
   final ({int tagSetNo, bool watched, bool hidden})? tagInfo;
 
   final VoidCallback onVoteUp;
   final VoidCallback onVoteDown;
   final VoidCallback onFollow;
   final VoidCallback onHide;
+  final VoidCallback onToggleExtraWatch;
   final VoidCallback onGotoTagSets;
 
   const EHTagDialogDesktopActions({
@@ -24,11 +26,13 @@ class EHTagDialogDesktopActions extends StatelessWidget {
     required this.voteDownState,
     required this.addWatchedTagState,
     required this.addHiddenTagState,
+    required this.isExtraWatchedTag,
     required this.tagInfo,
     required this.onVoteUp,
     required this.onVoteDown,
     required this.onFollow,
     required this.onHide,
+    required this.onToggleExtraWatch,
     required this.onGotoTagSets,
   }) : super(key: key);
 
@@ -80,6 +84,15 @@ class EHTagDialogDesktopActions extends StatelessWidget {
               tooltip: tagInfo?.hidden == true ? '${'hidden'.tr} · #${tagInfo!.tagSetNo}' : 'tagActionHideHint'.tr,
               onTap: onHide,
             ),
+          _ActionButton(
+            activeIcon: Icons.bookmark,
+            inactiveIcon: Icons.bookmark_border,
+            label: (isExtraWatchedTag ? 'extraWatchedTagsRemoveAction' : 'extraWatchedTagsAddAction').tr,
+            active: isExtraWatchedTag,
+            state: LoadingState.idle,
+            tooltip: 'extraWatchedTagsActionHint'.tr,
+            onTap: onToggleExtraWatch,
+          ),
           _ActionButton(
             activeIcon: Icons.settings,
             inactiveIcon: Icons.settings_outlined,

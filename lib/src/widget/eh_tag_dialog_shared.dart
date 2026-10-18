@@ -10,6 +10,7 @@ import 'package:jhentai/src/extension/widget_extension.dart';
 import 'package:jhentai/src/mixin/login_required_logic_mixin.dart';
 import 'package:jhentai/src/routes/routes.dart';
 import 'package:jhentai/src/setting/my_tags_setting.dart';
+import 'package:jhentai/src/setting/extra_watched_tag_setting.dart';
 import 'package:jhentai/src/setting/preference_setting.dart';
 import 'package:jhentai/src/setting/style_setting.dart';
 import 'package:jhentai/src/utils/eh_spider_parser.dart';
@@ -99,6 +100,24 @@ mixin EHTagVoteLogicMixin<T extends StatefulWidget> on State<T> implements Login
       }
     }
     return null;
+  }
+
+  bool get isExtraWatchedTag => extraWatchedTagSetting.contains(tagData.namespace, tagData.key);
+
+  Future<void> toggleExtraWatchedTag() async {
+    final String tag = '${tagData.namespace}:${tagData.key}';
+    if (isExtraWatchedTag) {
+      await extraWatchedTagSetting.removeTag(tag);
+      toast('extraWatchedTagsRemoved'.tr);
+    } else {
+      final bool added = await extraWatchedTagSetting.addTag(tag);
+      if (!added) {
+        toast('extraWatchedTagsAddFailed'.tr);
+        return;
+      }
+      toast('extraWatchedTagsAdded'.tr);
+    }
+    setStateSafely(() {});
   }
 
   Future<void> vote({required bool isVotingUp}) async {

@@ -105,6 +105,7 @@ class _EHTagBottomSheetState extends State<EHTagBottomSheet> with EHTagVoteLogic
               voteDownState: voteDownState,
               addWatchedTagState: addWatchedTagState,
               addHiddenTagState: addHiddenTagState,
+              isExtraWatchedTag: isExtraWatchedTag,
               tagInfo: findOnlineTag(),
               onVoteUp: () => vote(isVotingUp: true),
               onVoteDown: () => vote(isVotingUp: false),
@@ -124,6 +125,7 @@ class _EHTagBottomSheetState extends State<EHTagBottomSheet> with EHTagVoteLogic
                   handleAddTagToSet(watch: false);
                 }
               },
+              onToggleExtraWatch: toggleExtraWatchedTag,
               onGotoTagSets: gotoTagSets,
             ),
           ],

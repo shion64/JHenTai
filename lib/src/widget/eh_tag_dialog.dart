@@ -80,6 +80,7 @@ class _EHTagDialogState extends State<EHTagDialog> with EHTagVoteLogicMixin<EHTa
               voteDownState: voteDownState,
               addWatchedTagState: addWatchedTagState,
               addHiddenTagState: addHiddenTagState,
+              isExtraWatchedTag: isExtraWatchedTag,
               tagInfo: findOnlineTag(),
               onVoteUp: () => vote(isVotingUp: true),
               onVoteDown: () => vote(isVotingUp: false),
@@ -99,6 +100,7 @@ class _EHTagDialogState extends State<EHTagDialog> with EHTagVoteLogicMixin<EHTa
                   handleAddTagToSet(watch: false);
                 }
               },
+              onToggleExtraWatch: toggleExtraWatchedTag,
               onGotoTagSets: gotoTagSets,
             ),
           ],

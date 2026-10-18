@@ -12,12 +12,14 @@ class EHTagDialogMobileActions extends StatelessWidget {
   final LoadingState voteDownState;
   final LoadingState addWatchedTagState;
   final LoadingState addHiddenTagState;
+  final bool isExtraWatchedTag;
   final ({int tagSetNo, bool watched, bool hidden})? tagInfo;
 
   final VoidCallback onVoteUp;
   final VoidCallback onVoteDown;
   final VoidCallback onFollow;
   final VoidCallback onHide;
+  final VoidCallback onToggleExtraWatch;
   final VoidCallback onGotoTagSets;
 
   const EHTagDialogMobileActions({
@@ -27,11 +29,13 @@ class EHTagDialogMobileActions extends StatelessWidget {
     required this.voteDownState,
     required this.addWatchedTagState,
     required this.addHiddenTagState,
+    required this.isExtraWatchedTag,
     required this.tagInfo,
     required this.onVoteUp,
     required this.onVoteDown,
     required this.onFollow,
     required this.onHide,
+    required this.onToggleExtraWatch,
     required this.onGotoTagSets,
   }) : super(key: key);
 
@@ -95,6 +99,15 @@ class EHTagDialogMobileActions extends StatelessWidget {
             subtitle: tagInfo?.watched == true ? '${'watched'.tr} · #${tagInfo!.tagSetNo}' : null,
             onTap: onFollow,
           ),
+        // Placed right after the online follow action so it stays within the first visible rows.
+        _ActionTile(
+          activeIcon: Icons.bookmark,
+          inactiveIcon: Icons.bookmark_border,
+          label: (isExtraWatchedTag ? 'extraWatchedTagsRemoveAction' : 'extraWatchedTagsAddAction').tr,
+          active: isExtraWatchedTag,
+          state: LoadingState.idle,
+          onTap: onToggleExtraWatch,
+        ),
         if (tagInfo?.watched != true)
           _ActionTile(
             activeIcon: Icons.visibility_off,
