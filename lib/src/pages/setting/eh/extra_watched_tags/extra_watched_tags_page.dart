@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jhentai/src/service/tag_translation_service.dart';
 import 'package:jhentai/src/setting/extra_watched_tag_setting.dart';
+import 'package:jhentai/src/utils/search_util.dart';
 
 import '../../../../utils/toast_util.dart';
 
@@ -43,7 +44,12 @@ class _ExtraWatchedTagsPageState extends State<ExtraWatchedTagsPage> {
   }
 
   Future<void> _add(String tag) async {
+    // Invalidate any in-flight autocomplete request before the input is cleared.
+    searchToken++;
     bool success = await extraWatchedTagSetting.addTag(tag);
+    if (!mounted) {
+      return;
+    }
     if (!success) {
       toast('extraWatchedTagsAddFailed'.tr);
       return;
@@ -110,6 +116,15 @@ class _ExtraWatchedTagsPageState extends State<ExtraWatchedTagsPage> {
   Widget _buildTagTile(String tag) {
     return ListTile(
       title: Text(tag),
+      onTap: () {
+        final int separator = tag.indexOf(':');
+        if (separator <= 0 || separator == tag.length - 1) {
+          return;
+        }
+        final String namespace = tag.substring(0, separator);
+        final String key = tag.substring(separator + 1);
+        newSearch(keyword: '$namespace:"$key\$"', forceNewRoute: true);
+      },
       trailing: IconButton(
         icon: const Icon(Icons.delete_outline),
         onPressed: () => extraWatchedTagSetting.removeTag(tag),
