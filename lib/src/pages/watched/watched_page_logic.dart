@@ -51,7 +51,11 @@ class WatchedPageLogic extends BasePageLogic {
     GalleryPageInfo official = await super.getGalleryPage(prevGid: prevGid, nextGid: nextGid, seek: seek);
 
     List<String> extraTags = extraWatchedTagSetting.tags.toList();
-    if (extraTags.isEmpty || official.galleries.isEmpty) {
+    if (extraTags.isEmpty) {
+      return official;
+    }
+
+    if (official.galleries.isEmpty && (prevGid != null || nextGid != null || seek != null)) {
       return official;
     }
 
@@ -62,6 +66,20 @@ class WatchedPageLogic extends BasePageLogic {
     } catch (e) {
       log.warning('Load extra watched galleries failed', e, true);
       return official;
+    }
+
+    // An empty official list has no time range for a merge. Show local results
+    // on the initial page anyway, but do not repeat all of them on older cursors.
+    if (official.galleries.isEmpty) {
+      List<Gallery> merged = [...extraGalleries]
+        ..sort((a, b) => b.publishTime.compareTo(a.publishTime));
+      return GalleryPageInfo(
+        galleries: merged,
+        favoriteSortOrder: official.favoriteSortOrder,
+        totalCount: official.totalCount,
+        prevGid: official.prevGid,
+        nextGid: official.nextGid,
+      );
     }
 
     /// The official result is paged by cursor, so only the extra galleries which fall into the time range of
