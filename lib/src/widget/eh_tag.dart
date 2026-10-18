@@ -1,6 +1,8 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jhentai/src/config/ui_config.dart';
+import 'package:jhentai/src/setting/extra_watched_tag_setting.dart';
 import 'package:simple_animations/animation_controller_extension/animation_controller_extension.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
 
@@ -58,6 +60,16 @@ class _EHTagState extends State<EHTag> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      final bool hasExtraWatchedTags = extraWatchedTagSetting.tags.isNotEmpty;
+      return _buildTag(context, hasExtraWatchedTags);
+    });
+  }
+
+  Widget _buildTag(BuildContext context, bool hasExtraWatchedTags) {
+    final bool isExtraWatchedTag = hasExtraWatchedTags &&
+        widget.tag.tagData.namespace != 'rows' &&
+        extraWatchedTagSetting.contains(widget.tag.tagData.namespace, widget.tag.tagData.key);
     Widget child = Text(
       (widget.tag.tagData.tagName ?? widget.tag.tagData.key) +
           (widget.tag.voteStatus == EHTagVoteStatus.up
@@ -70,7 +82,9 @@ class _EHTagState extends State<EHTag> with AnimationMixin {
       style: TextStyle(
         fontSize: 12,
         height: 1,
-        color: widget.tag.color ?? (widget.addNameSpaceColor ? UIConfig.tagNameSpaceTextColor : UIConfig.ehTagTextColor(context)),
+        color: isExtraWatchedTag && widget.tag.backgroundColor == null
+            ? UIConfig.extraWatchedTagTextColor(context)
+            : widget.tag.color ?? (widget.addNameSpaceColor ? UIConfig.tagNameSpaceTextColor : UIConfig.ehTagTextColor(context)),
       ),
     );
 
@@ -122,9 +136,12 @@ class _EHTagState extends State<EHTag> with AnimationMixin {
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       decoration: BoxDecoration(
         color: widget.tag.backgroundColor ??
-            (widget.addNameSpaceColor
+            (isExtraWatchedTag
+                ? UIConfig.extraWatchedTagBackgroundColor(context)
+                : (widget.addNameSpaceColor
                 ? UIConfig.zhTagNameSpaceColor[widget.tag.tagData.key] ?? UIConfig.tagNameSpaceColor[widget.tag.tagData.key] ?? UIConfig.tagNameSpaceColor['default']
-                : UIConfig.ehTagBackGroundColor(context)),
+                : UIConfig.ehTagBackGroundColor(context))),
+        border: isExtraWatchedTag ? Border.all(color: UIConfig.extraWatchedTagBorderColor(context), width: 1.5) : null,
         borderRadius: BorderRadius.circular(8),
       ),
       child: child,

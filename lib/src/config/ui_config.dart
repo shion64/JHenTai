@@ -529,6 +529,16 @@ class UIConfig {
 
   static Color ehTagUnderLineColor(BuildContext context) => Theme.of(context).colorScheme.secondary;
 
+  static Color extraWatchedTagBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark
+      ? const Color(0xFF7E57C2)
+      : const Color(0xFF6A1B9A);
+
+  static Color extraWatchedTagBorderColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark
+      ? const Color(0xFFCE93D8)
+      : const Color(0xFF7B1FA2);
+
+  static Color extraWatchedTagTextColor(BuildContext context) => Colors.white;
+
   static Color ehTagDeleteButtonBackGroundColor(BuildContext context) => Theme.of(context).colorScheme.secondary.withValues(alpha: 0.25);
 
   static Duration ehTagAnimationDuration = const Duration(milliseconds: 200);
